@@ -1,0 +1,113 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: #0f172a;
+    color: #e2e8f0;
+    line-height: 1.6;
+}
+
+header {
+    background: linear-gradient(135deg, #1e1b4b, #311042);
+    padding: 2rem;
+    text-align: center;
+    border-bottom: 4px solid #a855f7;
+}
+
+header h1 {
+    font-size: 2.5rem;
+    color: #f8fafc;
+    margin-bottom: 0.5rem;
+}
+
+header p {
+    color: #cbd5e1;
+    font-size: 1.1rem;
+}
+
+main {
+    max-width: 1000px;
+    margin: 2rem auto;
+    padding: 0 1rem;
+}
+
+.content-section {
+    background-color: #1e293b;
+    padding: 2rem;
+    border-radius: 12px;
+    margin-bottom: 2rem;
+    border-left: 5px solid #3b82f6;
+}
+
+.content-section h2 {
+    color: #3b82f6;
+    margin-bottom: 1rem;
+}
+
+.alert-section {
+    border-left-color: #ef4444;
+}
+
+.alert-box {
+    background-color: #3f1d38;
+    border-left: 5px solid #ef4444;
+    padding: 1rem;
+    border-radius: 6px;
+    margin-top: 1rem;
+}
+
+/* Estilos do Jogo */
+.game-container {
+    background-color: #1e293b;
+    padding: 2rem;
+    border-radius: 12px;
+    text-align: center;
+    border-left: 5px solid #22c55e;
+}
+
+.game-container h2 {
+    color: #22c55e;
+    margin-bottom: 0.5rem;
+}
+
+#game-canvas {
+    background-color: #020617;
+    border: 3px solid #475569;
+    display: block;
+    margin: 1rem auto;
+    border-radius: 8px;
+}
+
+.scoreboard {
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+    font-weight: bold;
+}
+
+.instructions {
+    background-color: #0f172a;
+    padding: 1rem;
+    border-radius: 8px;
+    max-width: 500px;
+    margin: 0 auto 1rem auto;
+    font-size: 0.9rem;
+    text-align: left;
+}
+
+.instructions span {
+    font-weight: bold;
+}
+
+.txt-fact { color: #22c55e; }
+.txt-fake { color: #ef4444; }
+
+footer {
+    text-align: center;
+    padding: 2rem;
+    color: #64748b;
+    font-size: 0.9rem;
+}
