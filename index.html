@@ -1,0 +1,317 @@
+Aqui está um código completo (HTML, CSS e JavaScript) para um site interativo sobre **Cidadania Digital e Inteligência Artificial**, focado no impacto das *deepfakes*.
+
+No final da página, incluí o **Jogo da Minhoca (Snake) adaptado**, onde você controla a "Minhoca da Verdade" para comer apenas os fatos reais e evitar as *deepfakes*.
+
+Para testar, basta salvar o código abaixo em um arquivo chamado `index.html` e abri-lo no seu navegador!
+
+```html
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cidadania Digital & IA: O Impacto das Deepfakes</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: #0f172a;
+            color: #e2e8f0;
+            line-height: 1.6;
+        }
+
+        header {
+            background: linear-gradient(135deg, #1e1b4b, #311042);
+            padding: 2rem;
+            text-align: center;
+            border-bottom: 4px solid #a855f7;
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            color: #f8fafc;
+            margin-bottom: 0.5rem;
+        }
+
+        header p {
+            color: #cbd5e1;
+            font-size: 1.1rem;
+        }
+
+        main {
+            max-width: 1000px;
+            margin: 2rem auto;
+            padding: 0 1rem;
+        }
+
+        .content-section {
+            background-color: #1e293b;
+            padding: 2rem;
+            border-radius: 12px;
+            margin-bottom: 2rem;
+            border-left: 5px solid #3b82f6;
+        }
+
+        .content-section h2 {
+            color: #3b82f6;
+            margin-bottom: 1rem;
+        }
+
+        .alert-box {
+            background-color: #3f1d38;
+            border-left: 5px solid #ef4444;
+            padding: 1rem;
+            border-radius: 6px;
+            margin-top: 1rem;
+        }
+
+        /* Estilos do Jogo */
+        .game-container {
+            background-color: #1e293b;
+            padding: 2rem;
+            border-radius: 12px;
+            text-align: center;
+            border-left: 5px solid #22c55e;
+        }
+
+        .game-container h2 {
+            color: #22c55e;
+            margin-bottom: 0.5rem;
+        }
+
+        #game-canvas {
+            background-color: #020617;
+            border: 3px solid #475569;
+            display: block;
+            margin: 1rem auto;
+            border-radius: 8px;
+        }
+
+        .scoreboard {
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            font-weight: bold;
+        }
+
+        .instructions {
+            background-color: #0f172a;
+            padding: 1rem;
+            border-radius: 8px;
+            max-width: 500px;
+            margin: 0 auto 1rem auto;
+            font-size: 0.9rem;
+            text-align: left;
+        }
+
+        .instructions span {
+            font-weight: bold;
+        }
+
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: #64748b;
+            font-size: 0.9rem;
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Cidadania Digital e Inteligência Artificial</h1>
+        <p>O Impacto das Deepfakes e da Desinformação na Sociedade</p>
+    </header>
+
+    <main>
+        <section class="content-section">
+            <h2>O que é Cidadania Digital?</h2>
+            <p>Ser um cidadão digital significa usar a tecnologia de forma responsável, crítica e ética. Com o avanço da Inteligência Artificial, essa responsabilidade aumentou. Hoje, navegar na internet exige atenção redobrada para não espalhar boatos e saber diferenciar o que é real do que foi gerado por computadores.</p>
+        </section>
+
+        <section class="content-section" style="border-left-color: #ef4444;">
+            <h2>O Perigo das Deepfakes</h2>
+            <p>As <strong>Deepfakes</strong> são vídeos, áudios ou imagens criados por IA que imitam perfeitamente o rosto e a voz de pessoas reais. Embora tenham um lado divertido (como em efeitos de cinema), elas são frequentemente usadas para espalhar desinformação, aplicar golpes e manipular debates políticos.</p>
+            <div class="alert-box">
+                <strong>💡 Dica de Cidadania:</strong> Sempre desconfie de vídeos bombásticos. Verifique se portais de notícias confiáveis estão falando sobre o assunto antes de compartilhar!
+            </div>
+        </section>
+
+        <section class="game-container">
+            <h2>Jogo: A Minhoca da Verdade</h2>
+            <p>Ajude a minhoca a coletar fatos reais e fugir das fake news e deepfakes!</p>
+            
+            <div class="instructions">
+                <p>🎮 <strong>Como jogar:</strong> Use as <strong>setas do teclado</strong> ou as teclas <strong>W, A, S, D</strong> para mover.</p>
+                <p>🍏 <span style="color: #22c55e;">Verde (Fato Real):</span> Dá +10 pontos e faz você crescer.</p>
+                <p>🍎 <span style="color: #ef4444;">Vermelho (Deepfake/Fake News):</span> Tira uma vida! Se colidir com as paredes ou com você mesmo, o jogo reinicia.</p>
+            </div>
+
+            <div class="scoreboard">
+                Pontos: <span id="score">0</span> | Vidas: <span id="lives">3</span>
+            </div>
+
+            <canvas id="game-canvas" width="400" height="400"></canvas>
+        </section>
+    </main>
+
+    <footer>
+        <p>© 2026 - Desenvolvido para fins educativos sobre Cidadania Digital.</p>
+    </footer>
+
+    <script>
+        const canvas = document.getElementById("game-canvas");
+        const ctx = canvas.getContext("2d");
+        const scoreElement = document.getElementById("score");
+        const livesElement = document.getElementById("lives");
+
+        const gridSize = 20;
+        const tileCount = canvas.width / gridSize;
+
+        // Estado do jogo
+        let snake = [{ x: 10, y: 10 }];
+        let dx = 1;
+        let dy = 0;
+        let score = 0;
+        let lives = 3;
+
+        // Itens
+        let realFact = { x: 5, y: 5 };
+        let deepfake = { x: 15, y: 15 };
+
+        // Controle de velocidade (loop do jogo)
+        let gameInterval = setInterval(drawGame, 100);
+
+        // Ouvir teclas
+        window.addEventListener("keydown", changeDirection);
+
+        function drawGame() {
+            moveSnake();
+
+            // Verificar colisões graves (paredes ou corpo)
+            if (checkGameOver()) {
+                resetGame();
+                return;
+            }
+
+            // Verificar se comeu o fato real
+            if (snake[0].x === realFact.x && snake[0].y === realFact.y) {
+                score += 10;
+                scoreElement.textContent = score;
+                generateRealFact();
+                generateDeepfake(); // Muda a deepfake de lugar para confundir
+            } else {
+                snake.pop(); // Remove a cauda se não comeu nada positivo
+            }
+
+            // Verificar se bateu na deepfake (perde vida)
+            if (snake[0].x === deepfake.x && snake[0].y === deepfake.y) {
+                lives--;
+                livesElement.textContent = lives;
+                generateDeepfake();
+                if (lives <= 0) {
+                    alert("As Deepfakes venceram! Fique mais atento à desinformação.");
+                    resetGame();
+                    return;
+                }
+            }
+
+            // Desenhar tudo
+            clearScreen();
+            drawRealFact();
+            drawDeepfake();
+            drawSnake();
+        }
+
+        function clearScreen() {
+            ctx.fillStyle = "#020617";
+            ctx.fillRect(0, 0, canvas.width, canvas.height);
+        }
+
+        function drawSnake() {
+            ctx.fillStyle = "#22c55e"; // Minhoca verde da verdade
+            snake.forEach((part, index) => {
+                // A cabeça é um pouco mais escura
+                if (index === 0) ctx.fillStyle = "#15803d";
+                else ctx.fillStyle = "#22c55e";
+                
+                ctx.fillRect(part.x * gridSize, part.y * gridSize, gridSize - 2, gridSize - 2);
+            });
+        }
+
+        function moveSnake() {
+            const head = { x: snake[0].x + dx, y: snake[0].y + dy };
+            snake.unshift(head);
+        }
+
+        function changeDirection(event) {
+            const keyPressed = event.keyCode;
+            const GO_UP = keyPressed === 38 || keyPressed === 87;    // Seta Cima / W
+            const GO_DOWN = keyPressed === 40 || keyPressed === 83;  // Seta Baixo / S
+            const GO_LEFT = keyPressed === 37 || keyPressed === 65;  // Seta Esquerda / A
+            const GO_RIGHT = keyPressed === 39 || keyPressed === 68; // Seta Direita / D
+
+            // Evita que a minhoca volte diretamente para trás
+            if (GO_UP && dy !== 1) { dx = 0; dy = -1; }
+            if (GO_DOWN && dy !== -1) { dx = 0; dy = 1; }
+            if (GO_LEFT && dx !== 1) { dx = -1; dy = 0; }
+            if (GO_RIGHT && dx !== -1) { dx = 1; dy = 0; }
+        }
+
+        function checkGameOver() {
+            const head = snake[0];
+            // Bateu na parede
+            if (head.x < 0 || head.x >= tileCount || head.y < 0 || head.y >= tileCount) {
+                return true;
+            }
+            // Bateu no próprio corpo
+            for (let i = 1; i < snake.length; i++) {
+                if (head.x === snake[i].x && head.y === snake[i].y) {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        function generateRealFact() {
+            realFact.x = Math.floor(Math.random() * tileCount);
+            realFact.y = Math.floor(Math.random() * tileCount);
+        }
+
+        function generateDeepfake() {
+            deepfake.x = Math.floor(Math.random() * tileCount);
+            deepfake.y = Math.floor(Math.random() * tileCount);
+        }
+
+        function drawRealFact() {
+            ctx.fillStyle = "#22c55e"; // Fato Real
+            ctx.beginPath();
+            ctx.arc(realFact.x * gridSize + gridSize/2, realFact.y * gridSize + gridSize/2, gridSize/2 - 2, 0, 2 * Math.PI);
+            ctx.fill();
+        }
+
+        function drawDeepfake() {
+            ctx.fillStyle = "#ef4444"; // Deepfake perigosa
+            ctx.fillRect(deepfake.x * gridSize + 2, deepfake.y * gridSize + 2, gridSize - 4, gridSize - 4);
+        }
+
+        function resetGame() {
+            snake = [{ x: 10, y: 10 }];
+            dx = 1;
+            dy = 0;
+            score = 0;
+            lives = 3;
+            scoreElement.textContent = score;
+            livesElement.textContent = lives;
+            generateRealFact();
+            generateDeepfake();
+        }
+    </script>
+</body>
+</html>
+
+```
